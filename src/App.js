@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import GlobalStyles from "./components/GlobalStyles";
 import ImportantPage from "./pages/ImportantPage";
 import PlannedPage from "./pages/PlannedPage";
