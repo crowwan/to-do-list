@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import StyledContainer from "../components/StyledContainer";
+import StyledContainer from "../styled/StyledContainer";
 
 const StyledHeader = styled.header`
   display: flex;
