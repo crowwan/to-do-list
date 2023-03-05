@@ -1,7 +1,7 @@
-import React from "react";
+import Main from "../layouts/Main";
 
 function TodayPage() {
-  return <div>TodayPage</div>;
+  return <Main title="오늘 할 일" />;
 }
 
 export default TodayPage;
