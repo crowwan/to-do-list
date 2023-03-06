@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import GlobalStyles from "./components/GlobalStyles";
-import ImportantPage from "./pages/ImportantPage";
+import routerData from "./data/routerData";
 import LogInPage from "./pages/LogInPage";
-import PlannedPage from "./pages/PlannedPage";
 import Template from "./pages/Template";
-import TodayPage from "./pages/TodayPage";
 
 function App() {
   const [test, setTest] = useState("");
@@ -25,9 +23,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LogInPage />} />
         <Route path="/user" element={<Template />}>
-          <Route path="today" element={<TodayPage />} />
-          <Route path="important" element={<ImportantPage />} />
-          <Route path="planned" element={<PlannedPage />} />
+          {routerData.map((a) => (
+            <Route path={a.path} element={a.element} />
+          ))}
         </Route>
       </Routes>
     </>
