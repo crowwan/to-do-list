@@ -3,15 +3,11 @@ import StyledContainer from "../styled/StyledContainer";
 import styled from "styled-components";
 import UtilButtonContainer from "../components/UtilButtonContainer";
 import ToDoItem from "../components/ToDoItem";
+import StyledMainTitle from "../styled/StyledMainTitle";
 const StyledMain = styled.main`
   color: #fff;
   min-height: calc(100vh - 3rem);
   padding: 2rem 0;
-`;
-const StyledMainTitle = styled.h3`
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
 `;
 
 const StyledInput = styled.input.attrs({
