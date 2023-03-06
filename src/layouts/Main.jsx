@@ -4,27 +4,11 @@ import styled from "styled-components";
 import UtilButtonContainer from "../components/UtilButtonContainer";
 import ToDoItem from "../components/ToDoItem";
 import StyledMainTitle from "../styled/StyledMainTitle";
+import StyledInput from "../styled/StyledInput";
 const StyledMain = styled.main`
   color: #fff;
   min-height: calc(100vh - 3rem);
   padding: 2rem 0;
-`;
-
-const StyledInput = styled.input.attrs({
-  placeholder: "작업 추가",
-})`
-  background-color: #252423;
-  outline: none;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 16px;
-  color: white;
-  width: 100%;
-  border-bottom: 1px solid #fff;
-
-  &::placeholder {
-    color: #82abf1;
-  }
 `;
 
 const StyledToDoContainer = styled.div`
@@ -40,7 +24,7 @@ function Main({ title }) {
     <StyledContainer>
       <StyledMain>
         <StyledMainTitle>{title}</StyledMainTitle>
-        <StyledInput />
+        <StyledInput placeholder={"작업 추가"} />
         <UtilButtonContainer />
         <StyledToDoContainer>
           {test.map((a) => (
