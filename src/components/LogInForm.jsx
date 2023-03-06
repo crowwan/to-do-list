@@ -24,11 +24,13 @@ const StyledSubmitBtn = styled.button`
   border: none;
   padding: 0.2rem 0.5rem;
   border-radius: 5px;
+  font-weight: bold;
 `;
 const StyledBtnContainer = styled.div`
   display: flex;
   width: 100%;
   gap: 2rem;
+  margin-top: 1rem;
 `;
 function LogInForm() {
   return (
