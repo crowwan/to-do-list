@@ -27,8 +27,8 @@ function Main({ title }) {
         <StyledInput placeholder={"작업 추가"} />
         <UtilButtonContainer />
         <StyledToDoContainer>
-          {test.map((a) => (
-            <ToDoItem />
+          {test.map((a, i) => (
+            <ToDoItem key={i} />
           ))}
         </StyledToDoContainer>
       </StyledMain>
