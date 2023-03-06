@@ -33,11 +33,11 @@ const StyledNavButton = styled.div`
   }
 `;
 
-function Header() {
+function Header({ onNavBtnClick }) {
   return (
     <StyledContainer bgColor={"#252423"}>
       <StyledHeader>
-        <StyledNavButton />
+        <StyledNavButton onClick={onNavBtnClick} />
         <div>To Do</div>
       </StyledHeader>
     </StyledContainer>
