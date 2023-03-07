@@ -17,6 +17,11 @@ const StyledToDoContainer = styled.div`
   margin-top: 2rem;
   flex-wrap: wrap;
 `;
+const StyledInputContainer = styled.div`
+  width: 100%;
+  background-color: #252423;
+  padding: 1rem;
+`;
 
 function Main({ title }) {
   const test = [1, 2, 3, 4, 5, 6];
@@ -24,8 +29,10 @@ function Main({ title }) {
     <StyledContainer>
       <StyledMain>
         <StyledMainTitle>{title}</StyledMainTitle>
-        <StyledInput placeholder={"작업 추가"} />
-        <UtilButtonContainer />
+        <StyledInputContainer>
+          <StyledInput placeholder={"오늘 할 일을 여기에 입력하세요."} />
+          <UtilButtonContainer />
+        </StyledInputContainer>
         <StyledToDoContainer>
           {test.map((a, i) => (
             <ToDoItem key={i} />
