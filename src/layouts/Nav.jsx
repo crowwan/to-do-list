@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import routerData from "../data/routerData";
 import StyledContainer from "../styled/StyledContainer";
@@ -13,12 +14,22 @@ const StyledNavContainer = styled(StyledContainer)`
   color: #fff;
 `;
 
-function Nav() {
+function Nav({ onNavBtnClick }) {
+  const navigation = useNavigate();
+  const onNavClick = (path) => {
+    console.log("clicked");
+    navigation(path);
+    onNavBtnClick();
+  };
   return (
     <StyledNavContainer>
       <div>To Do</div>
       {routerData.map((a) => (
-        <StyledNavItem icon={a.icon} title={a.name} />
+        <StyledNavItem
+          icon={a.icon}
+          title={a.name}
+          onClick={() => onNavClick(a.path)}
+        />
       ))}
     </StyledNavContainer>
   );
