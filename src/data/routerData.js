@@ -1,7 +1,7 @@
 import TodayPage from "../pages/TodayPage";
 import { BsSun } from "react-icons/bs";
 import { AiOutlineCalendar, AiFillStar } from "react-icons/ai";
-import PlannedPage from "../pages/PlannedPage";
+import EverydayPage from "../pages/EverydayPage";
 import ImportantPage from "../pages/ImportantPage";
 const routerData = [
   {
@@ -11,9 +11,9 @@ const routerData = [
     icon: <BsSun />,
   },
   {
-    name: "계획된 일",
-    path: "planned",
-    element: <PlannedPage />,
+    name: "매일 할 일",
+    path: "everyday",
+    element: <EverydayPage />,
     icon: <AiOutlineCalendar />,
   },
   {
