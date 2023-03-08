@@ -3,14 +3,15 @@ const StyledInput = styled.input.attrs((props) => ({
   type: props.type || "text",
   placeholder: props.placeholder,
 }))`
-  background-color: #252423;
+  background-color: #5f5f5f;
   outline: none;
   border: none;
   padding: 0.8rem 1.5rem;
   font-size: 16px;
   color: white;
   width: 100%;
-  border-bottom: 1px solid #fff;
+  border-radius: 5px;
+  margin-bottom: 2rem;
 
   &::placeholder {
     color: #82abf1;
