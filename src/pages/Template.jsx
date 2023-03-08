@@ -10,7 +10,7 @@ function Template() {
   return (
     <div>
       <Header onNavBtnClick={onNavBtnClick} />
-      {open && <Nav />}
+      {open && <Nav onNavBtnClick={onNavBtnClick} />}
       <Outlet />
     </div>
   );
