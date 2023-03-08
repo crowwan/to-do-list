@@ -15,10 +15,10 @@ const StyledList = styled.li`
   }
 `;
 
-function StyledNavItem({ icon, title }) {
+function StyledNavItem({ icon, title, onClick }) {
   return (
     <ul>
-      <StyledList>
+      <StyledList onClick={onClick}>
         <span>{icon}</span>
         <span>{title}</span>
       </StyledList>
