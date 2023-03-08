@@ -2,6 +2,7 @@ import styled from "styled-components";
 const StyledInput = styled.input.attrs((props) => ({
   type: props.type || "text",
   placeholder: props.placeholder,
+  maxLength: props.maxLength || 500,
 }))`
   background-color: #5f5f5f;
   outline: none;
