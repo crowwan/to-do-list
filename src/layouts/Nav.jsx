@@ -26,6 +26,7 @@ function Nav({ onNavBtnClick }) {
       <div>To Do</div>
       {routerData.map((a) => (
         <StyledNavItem
+          key={a.name}
           icon={a.icon}
           title={a.name}
           onClick={() => onNavClick(a.path)}
