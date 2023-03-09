@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import StyledContainer from "../styled/StyledContainer";
 import styled from "styled-components";
 import UtilButtonContainer from "../components/UtilButtonContainer";
 import ToDoItem from "../components/ToDoItem";
 import StyledMainTitle from "../styled/StyledMainTitle";
 import StyledInput from "../styled/StyledInput";
-import { dummyData } from "../data/dummyData";
+import ToDoItemModal from "../ui/ToDoItemModal";
+import { addData } from "../features/dataSlice";
+import StyledInputContainer from "../styled/StyledInputContainer";
+import { useDispatch, useSelector } from "react-redux";
+
 const StyledMain = styled.main`
   color: #fff;
   min-height: calc(100vh - 3rem);
@@ -18,10 +22,12 @@ const StyledToDoContainer = styled.div`
   margin-top: 2rem;
   flex-wrap: wrap;
 `;
-const StyledInputContainer = styled.div`
+
+const StyledErrorMsg = styled.div`
+  color: #ff6d6d;
   width: 100%;
-  background-color: #252423;
-  padding: 1rem;
+  text-align: center;
+  margin-top: 1rem;
 `;
 
 const filterByPath = (a, path) => {
@@ -31,6 +37,7 @@ const filterByPath = (a, path) => {
     case "today":
       return a.type === "today" || a.type === "everyday";
     case "everyday":
+      console.log(a, path);
       return a.type === "everyday";
     default:
       return null;
@@ -38,25 +45,63 @@ const filterByPath = (a, path) => {
 };
 
 function Main({ title, path }) {
-  const data = dummyData.filter((a) => filterByPath(a, path));
+  const data = useSelector((state) => state.data);
+  const dispatch = useDispatch();
+  const [modalItem, setModalItem] = useState(null);
+  console.log(data);
+  const [errMsg, setErrMsg] = useState("");
+  const inputRef = useRef();
+
+  // useEffect(() => {
+  //   // route가 바뀌긴 했는데 Main이 다시 렌더링 되지 않아서 useEffect가 실행되지 않은 것 같음
+  //   // 그래서 의존성 배열에 path를 넣어주었음
+
+  //   setData((prev) => prev.filter((a) => filterByPath(a, path)));
+  // }, [path]);
+
+  const onAddClick = (type) => {
+    if (!inputRef.current.value.length) {
+      setErrMsg("내용을 입력해주세요.");
+      return;
+    }
+    const newData = {
+      id: Date.now(),
+      content: inputRef.current.value,
+      type,
+      important: false,
+      isDone: false,
+      createdAt: Date.now(),
+    };
+    dispatch(addData(newData));
+    setErrMsg("");
+    inputRef.current.value = "";
+  };
   return (
-    <StyledContainer>
-      <StyledMain>
-        <StyledMainTitle>{title}</StyledMainTitle>
-        <StyledInputContainer>
-          <StyledInput
-            placeholder={"오늘 할 일을 여기에 입력하세요."}
-            maxLength={40}
-          />
-          <UtilButtonContainer />
-        </StyledInputContainer>
-        <StyledToDoContainer>
-          {data.map((a, i) => (
-            <ToDoItem key={i} item={a} />
-          ))}
-        </StyledToDoContainer>
-      </StyledMain>
-    </StyledContainer>
+    <>
+      <StyledContainer>
+        <StyledMain>
+          <StyledMainTitle>{title}</StyledMainTitle>
+          <StyledInputContainer>
+            <StyledInput
+              placeholder={"오늘 할 일을 여기에 입력하세요."}
+              maxLength={40}
+              ref={inputRef}
+            />
+
+            <UtilButtonContainer onClickHandler={onAddClick} />
+            {errMsg && <StyledErrorMsg>{errMsg}</StyledErrorMsg>}
+          </StyledInputContainer>
+          <StyledToDoContainer>
+            {data
+              .filter((a) => filterByPath(a, path))
+              .map((a, i) => (
+                <ToDoItem key={i} item={a} setModalItem={setModalItem} />
+              ))}
+          </StyledToDoContainer>
+        </StyledMain>
+      </StyledContainer>
+      {modalItem && <ToDoItemModal item={modalItem} />}
+    </>
   );
 }
 
