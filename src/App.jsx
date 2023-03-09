@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyles from "./components/GlobalStyles";
 import routerData from "./data/routerData";
 import Main from "./layouts/Main";
@@ -9,14 +9,13 @@ import Template from "./pages/Template";
 
 function App() {
   const isLogin = useSelector((s) => s.isLogin);
+  const navigation = useNavigate();
   console.log("render");
   useEffect(() => {
-    // (async () => {
-    //   const data = await fetch("http://localhost:8000").then((res) =>
-    //     res.json()
-    //   );
-    //   setTest(data);
-    // })();
+    if (!isLogin) {
+      console.log("t");
+      navigation("/");
+    }
   }, []);
   return (
     <>
