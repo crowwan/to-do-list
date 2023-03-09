@@ -6,6 +6,7 @@ import StyledSubmitBtn from "../styled/StyledSubmitBtn";
 import { useDispatch } from "react-redux";
 import { setIsLogin } from "../features/loginSlice";
 import { useNavigate } from "react-router-dom";
+import StyledSubTitle from "../styled/StyledSubTitle";
 const StyledContainer = styled.div`
   background-color: #252423;
   border-radius: 10px;
@@ -13,11 +14,6 @@ const StyledContainer = styled.div`
   padding: 1rem;
 `;
 
-const StyledSubTitle = styled(StyledMainTitle)`
-  font-size: 14px;
-  font-weight: 400;
-  margin-bottom: 1rem;
-`;
 const StyledLogInInput = styled(StyledInput)`
   background-color: #1e1e1e;
   border: none;
