@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
-import ToDoItemModal from "../ui/ToDoItemModal";
+
 const StyledItemContainer = styled.div`
   display: flex;
   width: 100%;
@@ -40,14 +40,13 @@ const StyledStarContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-function ToDoItem({ item }) {
-  const [showModal, setShowModal] = useState(false);
+function ToDoItem({ item, setModalItem }) {
   // 텍스트 길이를 넘어가면 그냥 없애라
   return (
     <>
       <StyledItemContainer>
         <StyledCheckCircle checked={item.isDone} />
-        <StyledTask onClick={() => setShowModal(true)}>
+        <StyledTask onClick={() => setModalItem(item)}>
           <span>{item.content}</span>
         </StyledTask>
         <StyledStarContainer>
@@ -58,7 +57,6 @@ function ToDoItem({ item }) {
           )}
         </StyledStarContainer>
       </StyledItemContainer>
-      {showModal && <ToDoItemModal />}
     </>
   );
 }
