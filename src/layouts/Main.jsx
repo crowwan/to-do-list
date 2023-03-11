@@ -6,8 +6,9 @@ import ToDoItem from "../components/ToDoItem";
 import StyledMainTitle from "../styled/StyledMainTitle";
 import StyledInput from "../styled/StyledInput";
 import ToDoItemModal from "../ui/ToDoItemModal";
-import { addData } from "../features/dataSlice";
 import StyledInputContainer from "../styled/StyledInputContainer";
+import StyledErrorMsg from "../styled/StyledErrorMsg";
+import { addData } from "../features/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const StyledMain = styled.main`
@@ -21,13 +22,6 @@ const StyledToDoContainer = styled.div`
   gap: 1rem;
   margin-top: 2rem;
   flex-wrap: wrap;
-`;
-
-const StyledErrorMsg = styled.div`
-  color: #ff6d6d;
-  width: 100%;
-  text-align: center;
-  margin-top: 1rem;
 `;
 
 const filterByPath = (a, path) => {
@@ -48,7 +42,6 @@ function Main({ title, path }) {
   const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
   const [modalItem, setModalItem] = useState(null);
-  console.log(data);
   const [errMsg, setErrMsg] = useState("");
   const inputRef = useRef();
 
@@ -84,11 +77,13 @@ function Main({ title, path }) {
           <StyledInputContainer>
             <StyledInput
               placeholder={"오늘 할 일을 여기에 입력하세요."}
-              maxLength={40}
               ref={inputRef}
             />
 
-            <UtilButtonContainer onClickHandler={onAddClick} />
+            <UtilButtonContainer
+              btns={[{ onClickHandler: onAddClick, text: "추가하기" }]}
+              name="today"
+            />
             {errMsg && <StyledErrorMsg>{errMsg}</StyledErrorMsg>}
           </StyledInputContainer>
           <StyledToDoContainer>
@@ -100,7 +95,9 @@ function Main({ title, path }) {
           </StyledToDoContainer>
         </StyledMain>
       </StyledContainer>
-      {modalItem && <ToDoItemModal item={modalItem} />}
+      {modalItem && (
+        <ToDoItemModal item={modalItem} setModalItem={setModalItem} />
+      )}
     </>
   );
 }
