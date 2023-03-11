@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import StyledSubmitBtn from "../styled/StyledSubmitBtn";
+import StyledTypeBtn from "../styled/StyledTypeBtn";
 const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -20,36 +21,16 @@ const StyledTypeBtnContainer = styled.div`
   padding-left: 0.5rem;
   margin-bottom: 2rem;
 `;
-const StyledTypeBtn = styled.button`
-  cursor: pointer;
-  border: none;
-  font-weight: bold;
-  color: ${(props) => (props.checked ? "#4e87e9" : "#ffffff")};
-  background-color: transparent;
-  font-size: 16px;
-`;
 
-const StyledSubmitBtn = styled.button`
-  background-color: transparent;
-  padding: 0.2rem 1rem;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  width: 100%;
-  height: 2rem;
-  color: #fff;
-  background-color: #4e87e9;
-`;
-
-function UtilButtonContainer() {
+function UtilButtonContainer({ btns, name }) {
   const [type, setType] = useState([
     {
       name: "Today",
-      checked: true,
+      checked: "today" === name,
     },
     {
       name: "Everyday",
-      checked: false,
+      checked: "everyday" === name,
     },
   ]);
   const onTypeBtnClick = (name) => {
@@ -72,7 +53,16 @@ function UtilButtonContainer() {
           </StyledTypeBtn>
         ))}
       </StyledTypeBtnContainer>
-      <StyledSubmitBtn>추가</StyledSubmitBtn>
+      {btns.map((a) => (
+        <StyledSubmitBtn
+          onClick={() =>
+            a.onClickHandler(type.find((a) => a.checked).name.toLowerCase())
+          }
+          bgc={a.bgColor}
+        >
+          {a.text}
+        </StyledSubmitBtn>
+      ))}
     </StyledContainer>
   );
 }
