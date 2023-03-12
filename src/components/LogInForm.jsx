@@ -44,6 +44,7 @@ function LogInForm() {
   };
 
   const onLoginClick = () => {
+    // TODO: validation
     console.log(idRef.current.value, pwRef.current.value);
     dispatch(setIsLogin(true));
     navigation("/today");

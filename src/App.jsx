@@ -8,6 +8,7 @@ import LogInPage from "./pages/LogInPage";
 import Template from "./pages/Template";
 
 function App() {
+  // TODO: login slice delete
   const isLogin = useSelector((s) => s.isLogin);
   const navigation = useNavigate();
   console.log("render");

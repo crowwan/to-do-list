@@ -42,6 +42,8 @@ const StyledStarContainer = styled.div`
 `;
 function ToDoItem({ item, setModalItem }) {
   // 텍스트 길이를 넘어가면 그냥 없애라
+
+  // TODO: click event handler 수정
   return (
     <>
       <StyledItemContainer>

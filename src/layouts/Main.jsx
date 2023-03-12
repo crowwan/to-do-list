@@ -52,6 +52,7 @@ function Main({ title, path }) {
   //   setData((prev) => prev.filter((a) => filterByPath(a, path)));
   // }, [path]);
 
+  // TODO: 에러 메시지 렌더링 시 전체가 렌더링 되는 문제 해결해야 함. 인풋 컨테이너를 컴포넌트로 빼면 될 듯
   const onAddClick = (type) => {
     if (!inputRef.current.value.length) {
       setErrMsg("내용을 입력해주세요.");
