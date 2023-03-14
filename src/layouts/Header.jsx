@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setIsLogin } from "../features/loginSlice";
+import { clearUser } from "../features/userSlice";
 import StyledContainer from "../styled/StyledContainer";
 
 const StyledHeader = styled.header`
@@ -45,7 +46,7 @@ const StyledLogoutBtn = styled.button`
 function Header({ onNavBtnClick }) {
   const dispatch = useDispatch();
   const onLogoutClick = () => {
-    dispatch(setIsLogin(false));
+    dispatch(clearUser(false));
   };
   return (
     <StyledContainer bgColor={"#252423"}>
