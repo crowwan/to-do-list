@@ -4,10 +4,11 @@ import StyledMainTitle from "../styled/StyledMainTitle";
 import StyledInput from "../styled/StyledInput";
 import StyledSubmitBtn from "../styled/StyledSubmitBtn";
 import { useDispatch } from "react-redux";
-import { setIsLogin } from "../features/loginSlice";
+import { setUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import StyledSubTitle from "../styled/StyledSubTitle";
 import StyledErrorMsg from "../styled/StyledErrorMsg";
+import axios from "axios";
 const StyledContainer = styled.div`
   background-color: #252423;
   border-radius: 10px;
@@ -67,9 +68,22 @@ function LogInForm() {
 
   const onLoginClick = () => {
     if (!loginValidate(idRef.current.value, pwRef.current.value)) return;
-
-    dispatch(setIsLogin(true));
-    navigation("/today");
+    // 생각보다 느림 로딩 페이지 반드시 필요
+    (async () => {
+      axios
+        .post(
+          "http://localhost:8000/user/login",
+          {
+            uid: idRef.current.value,
+            password: pwRef.current.value,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          dispatch(setUser(true));
+          navigation("/today");
+        });
+    })();
   };
 
   return (
