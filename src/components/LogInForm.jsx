@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setIsLogin } from "../features/loginSlice";
 import { useNavigate } from "react-router-dom";
 import StyledSubTitle from "../styled/StyledSubTitle";
+import StyledErrorMsg from "../styled/StyledErrorMsg";
 const StyledContainer = styled.div`
   background-color: #252423;
   border-radius: 10px;
@@ -36,6 +37,10 @@ function LogInForm() {
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigate();
+  const [errMsg, setErrMsg] = useState({
+    id: "",
+    pw: "",
+  });
   const idRef = useRef();
   const pwRef = useRef();
 
@@ -43,9 +48,26 @@ function LogInForm() {
     setIsSignup(true);
   };
 
+  const loginValidate = (id, pw) => {
+    let ret = true;
+    if (!id.length) {
+      setErrMsg((prev) => ({ ...prev, id: "아이디를 입력해주세요." }));
+      ret = false;
+    } else {
+      setErrMsg((prev) => ({ ...prev, id: "" }));
+    }
+    if (!pw.length) {
+      setErrMsg((prev) => ({ ...prev, pw: "비밀번호를 입력해주세요." }));
+      ret = false;
+    } else {
+      setErrMsg((prev) => ({ ...prev, pw: "" }));
+    }
+    return ret;
+  };
+
   const onLoginClick = () => {
-    // TODO: validation
-    console.log(idRef.current.value, pwRef.current.value);
+    if (!loginValidate(idRef.current.value, pwRef.current.value)) return;
+
     dispatch(setIsLogin(true));
     navigation("/today");
   };
@@ -55,8 +77,10 @@ function LogInForm() {
       <StyledMainTitle>{isSignup ? "회원가입" : "로그인"}</StyledMainTitle>
       <StyledSubTitle>아이디</StyledSubTitle>
       <StyledLogInInput type="text" placeholder={"아이디"} ref={idRef} />
+      {errMsg.id && <StyledErrorMsg>{errMsg.id}</StyledErrorMsg>}
       <StyledSubTitle>비밀번호</StyledSubTitle>
       <StyledLogInInput type="password" placeholder={"비밀번호"} ref={pwRef} />
+      {errMsg.pw && <StyledErrorMsg>{errMsg.pw}</StyledErrorMsg>}
       {!isSignup ? (
         <>
           <StyledSubmitBtn onClick={onLoginClick}>로그인</StyledSubmitBtn>
