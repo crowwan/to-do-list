@@ -10,11 +10,11 @@ import Template from "./pages/Template";
 function App() {
   // TODO: login slice delete
   const isLogin = useSelector((s) => s.isLogin);
+  const currentUser = useSelector((s) => s.user);
   const navigation = useNavigate();
   console.log("render");
   useEffect(() => {
-    if (!isLogin) {
-      console.log("t");
+    if (!currentUser) {
       navigation("/");
     }
   }, []);
@@ -22,7 +22,7 @@ function App() {
     <>
       <GlobalStyles />
       <Routes>
-        <Route path="/" element={!isLogin ? <LogInPage /> : <Template />}>
+        <Route path="/" element={!currentUser ? <LogInPage /> : <Template />}>
           {routerData.map((a) => (
             <Route
               key={a.name}
