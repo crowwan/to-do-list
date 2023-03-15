@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import routerData from "../data/routerData";
 import StyledContainer from "../styled/StyledContainer";
-import StyledNavItem from "../styled/StyledNavItem";
+import NavItem from "../components/NavItem";
 
 const StyledNavContainer = styled(StyledContainer)`
   width: 80vw;
@@ -25,7 +25,7 @@ function Nav({ onNavBtnClick }) {
     <StyledNavContainer>
       <div>To Do</div>
       {routerData.map((a) => (
-        <StyledNavItem
+        <NavItem
           key={a.name}
           icon={a.icon}
           title={a.name}
