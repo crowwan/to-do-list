@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { clearUser } from "../features/userSlice";
 import StyledContainer from "../styled/StyledContainer";
-import { logout } from "../util/fetchData";
+import { logout } from "../util/auth";
 
 const StyledHeader = styled.header`
   display: flex;

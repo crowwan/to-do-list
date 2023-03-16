@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import StyledSubTitle from "../styled/StyledSubTitle";
 import StyledErrorMsg from "../styled/StyledErrorMsg";
 import axios from "axios";
-import { login } from "../util/fetchData";
+import { login } from "../util/auth";
 const StyledContainer = styled.div`
   background-color: #252423;
   border-radius: 10px;
