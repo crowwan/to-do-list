@@ -42,6 +42,7 @@ function LogInForm() {
   const [errMsg, setErrMsg] = useState({
     id: "",
     pw: "",
+    db: "",
   });
   const idRef = useRef();
   const pwRef = useRef();
@@ -76,10 +77,14 @@ function LogInForm() {
         uid: idRef.current.value,
         password: pwRef.current.value,
       };
-      login(userData).then((res) => {
-        dispatch(setUser(true));
-        navigation("/today");
-      });
+      login(userData)
+        .then((res) => {
+          dispatch(setUser(true));
+          navigation("/today");
+        })
+        .catch(() => {
+          setErrMsg((prev) => ({ ...prev, db: "로그인에 실패하였습니다." }));
+        });
     })();
   };
 
@@ -107,6 +112,7 @@ function LogInForm() {
         ) : (
           <StyledSubmitBtn>회원가입</StyledSubmitBtn>
         )}
+        {errMsg.db && <StyledErrorMsg>{errMsg.db}</StyledErrorMsg>}
       </form>
     </StyledContainer>
   );
