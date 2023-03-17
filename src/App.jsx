@@ -1,23 +1,37 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyles from "./components/GlobalStyles";
 import routerData from "./data/routerData";
+import { setData } from "./features/dataSlice";
 import Main from "./layouts/Main";
 import LogInPage from "./pages/LogInPage";
 import Template from "./pages/Template";
+import { getTodos } from "./util/todos";
 
 function App() {
   // TODO: login slice delete
   const isLogin = useSelector((s) => s.isLogin);
   const currentUser = useSelector((s) => s.user);
+  const dispatch = useDispatch();
   const navigation = useNavigate();
   console.log("render");
   useEffect(() => {
     if (!currentUser) {
       navigation("/");
+    } else {
+      (() => {
+        getTodos()
+          .then((res) => {
+            dispatch(setData(res.data));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })();
     }
-  }, []);
+  }, [currentUser]);
   return (
     <>
       <GlobalStyles />
