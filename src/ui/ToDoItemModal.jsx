@@ -11,6 +11,7 @@ import StyledErrorMsg from "../styled/StyledErrorMsg";
 
 import { removeData, updateData } from "../features/dataSlice";
 import { useDispatch } from "react-redux";
+import { deleteTodo } from "../util/todos";
 
 const StyledWrapper = styled(StyledContainer)`
   position: fixed;
@@ -40,8 +41,12 @@ function ToDoItemModal({ item, setModalItem }) {
   };
   const onDeleteClick = () => {
     console.log(item.id);
-    dispatch(removeData({ id: item.id }));
-    setModalItem(null);
+    (() => {
+      deleteTodo(item.id).then((res) => {
+        dispatch(removeData({ id: item.id }));
+        setModalItem(null);
+      });
+    })();
   };
   useEffect(() => {
     inputRef.current.value = item.content;
