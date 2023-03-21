@@ -10,6 +10,7 @@ import StyledInputContainer from "../styled/StyledInputContainer";
 import StyledErrorMsg from "../styled/StyledErrorMsg";
 import { addData } from "../features/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../util/todos";
 
 const StyledMain = styled.main`
   color: #fff;
@@ -59,16 +60,18 @@ function Main({ title, path }) {
       return;
     }
     const newData = {
-      id: Date.now(),
       content: inputRef.current.value,
       type,
       important: false,
-      isDone: false,
-      createdAt: Date.now(),
+      checked: false,
     };
-    dispatch(addData(newData));
-    setErrMsg("");
-    inputRef.current.value = "";
+    (() => {
+      addTodo(newData).then((res) => {
+        dispatch(addData(res.data[0]));
+        setErrMsg("");
+        inputRef.current.value = "";
+      });
+    })();
   };
   return (
     <>
