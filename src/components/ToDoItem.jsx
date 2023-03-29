@@ -13,6 +13,12 @@ const StyledItemContainer = styled.div`
   padding: 0.8rem 1.5rem;
   font-size: 16px;
   animation: ${drop} 0.2s ease;
+
+  &:hover {
+    cursor: pointer;
+    transition: all 0.5s;
+    background-color: #3b3a39;
+  }
 `;
 const StyledTask = styled.div`
   display: flex;
@@ -47,9 +53,9 @@ function ToDoItem({ item, setModalItem }) {
   // TODO: click event handler 수정
   return (
     <>
-      <StyledItemContainer>
+      <StyledItemContainer onClick={() => setModalItem(item)}>
         <StyledCheckCircle checked={item.isDone} />
-        <StyledTask onClick={() => setModalItem(item)}>
+        <StyledTask>
           <span>{item.content}</span>
         </StyledTask>
         <StyledStarContainer>
