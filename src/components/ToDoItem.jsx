@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { drop } from "../animations/drop";
 
 const StyledItemContainer = styled.div`
   display: flex;
@@ -12,6 +12,7 @@ const StyledItemContainer = styled.div`
   align-items: center;
   padding: 0.8rem 1.5rem;
   font-size: 16px;
+  animation: ${drop} 0.2s ease;
 `;
 const StyledTask = styled.div`
   display: flex;
