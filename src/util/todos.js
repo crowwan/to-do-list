@@ -11,7 +11,7 @@ const addTodo = (data) => {
 };
 
 const updateTodo = (id, data) => {
-  return axios.post(`${BASE_URL}/id`, data);
+  return axios.post(`${BASE_URL}/${id}`, data);
 };
 
 const deleteTodo = (id) => {
