@@ -1,40 +1,53 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import routerData from "../data/routerData";
 import StyledContainer from "../styled/StyledContainer";
 import NavItem from "../components/NavItem";
 import { slideIn } from "../animations/slideIn";
+import NavButton from "../components/NavButton";
+
+const StyledWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+`;
 
 const StyledNavContainer = styled(StyledContainer)`
   width: 80vw;
   position: absolute;
-  top: 3rem;
-  height: calc(100vh - 3rem);
-  padding-top: 2rem;
+  height: calc(100%);
+  padding-top: 1.5rem;
   color: #fff;
   animation: ${slideIn} 0.2s ease;
 `;
 
 function Nav({ onNavBtnClick }) {
   const navigation = useNavigate();
+  const wrapperRef = useRef();
   const onNavClick = (path) => {
-    console.log("clicked");
     navigation(path);
     onNavBtnClick();
   };
+  const onWrapperClick = (e) => {
+    if (e.target === wrapperRef.current) onNavBtnClick();
+  };
   return (
-    <StyledNavContainer>
-      <div>To Do</div>
-      {routerData.map((a) => (
-        <NavItem
-          key={a.name}
-          icon={a.icon}
-          title={a.name}
-          onClick={() => onNavClick(a.path)}
-        />
-      ))}
-    </StyledNavContainer>
+    <StyledWrapper onClick={onWrapperClick} ref={wrapperRef}>
+      <StyledNavContainer>
+        <NavButton onNavBtnClick={onNavBtnClick} />
+        <div style={{ marginTop: "3rem" }}>To Do</div>
+        {routerData.map((a) => (
+          <NavItem
+            key={a.name}
+            icon={a.icon}
+            title={a.name}
+            onClick={() => onNavClick(a.path)}
+          />
+        ))}
+      </StyledNavContainer>
+    </StyledWrapper>
   );
 }
 
