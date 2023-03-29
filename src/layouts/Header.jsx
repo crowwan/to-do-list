@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { clearUser } from "../features/userSlice";
 import StyledContainer from "../styled/StyledContainer";
+import NavButton from "../components/NavButton";
 import { logout } from "../util/auth";
 
 const StyledHeader = styled.header`
@@ -15,29 +16,8 @@ const StyledHeader = styled.header`
     flex: 1 0 0;
   }
 `;
-const StyledNavButton = styled.div`
-  cursor: pointer;
-  position: relative;
-  width: 25px;
-  height: 3px;
-  background-color: #fff;
-  &::after {
-    content: "";
-    position: absolute;
-    top: -8px;
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    top: 8px;
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
-  }
-`;
+// TODO: 햄버거 버튼 after before로 만들면 클릭 이벤트 설정이 전체 div박스를 감싸지 못함
+
 const StyledLogoutBtn = styled.button`
   background-color: transparent;
   color: #fff;
@@ -55,7 +35,7 @@ function Header({ onNavBtnClick }) {
   return (
     <StyledContainer bgColor={"#252423"}>
       <StyledHeader>
-        <StyledNavButton onClick={onNavBtnClick} />
+        <NavButton onNavBtnClick={onNavBtnClick} />
         <div>To Do</div>
         <StyledLogoutBtn onClick={onLogoutClick}>Log Out</StyledLogoutBtn>
       </StyledHeader>
