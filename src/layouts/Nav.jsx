@@ -4,6 +4,7 @@ import styled from "styled-components";
 import routerData from "../data/routerData";
 import StyledContainer from "../styled/StyledContainer";
 import NavItem from "../components/NavItem";
+import { slideIn } from "../animations/slideIn";
 
 const StyledNavContainer = styled(StyledContainer)`
   width: 80vw;
@@ -12,6 +13,7 @@ const StyledNavContainer = styled(StyledContainer)`
   height: calc(100vh - 3rem);
   padding-top: 2rem;
   color: #fff;
+  animation: ${slideIn} 0.2s ease;
 `;
 
 function Nav({ onNavBtnClick }) {
