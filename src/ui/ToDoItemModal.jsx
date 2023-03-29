@@ -11,7 +11,7 @@ import StyledErrorMsg from "../styled/StyledErrorMsg";
 
 import { removeData, updateData } from "../features/dataSlice";
 import { useDispatch } from "react-redux";
-import { deleteTodo } from "../util/todos";
+import { deleteTodo, updateTodo } from "../util/todos";
 
 const StyledWrapper = styled(StyledContainer)`
   position: fixed;
@@ -28,17 +28,30 @@ const StyledWrapper = styled(StyledContainer)`
 
 function ToDoItemModal({ item, setModalItem }) {
   const inputRef = useRef(null);
+  const containerRef = useRef(null);
   const [errMsg, setErrMsg] = useState("");
   const dispatch = useDispatch();
+
+  const onModalOutsideClick = (e) => {
+    if (e.target === containerRef.current) setModalItem(null);
+  };
+
   const onUpdateClick = (type) => {
     if (!inputRef.current.value) {
       setErrMsg("내용을 입력해주세요.");
       return;
     }
     const newItem = { ...item, type, content: inputRef.current.value };
-    dispatch(updateData(newItem));
-    setModalItem(null);
+    (() => {
+      updateTodo(item.id, newItem)
+        .then((res) => {
+          dispatch(updateData(newItem));
+          setModalItem(null);
+        })
+        .catch((err) => console.error(err));
+    })();
   };
+
   const onDeleteClick = () => {
     console.log(item.id);
     (() => {
@@ -48,11 +61,12 @@ function ToDoItemModal({ item, setModalItem }) {
       });
     })();
   };
+
   useEffect(() => {
     inputRef.current.value = item.content;
   }, []);
   return (
-    <StyledWrapper>
+    <StyledWrapper onClick={onModalOutsideClick} ref={containerRef}>
       <StyledInputContainer>
         <StyledMainTitle>수정하기</StyledMainTitle>
         <StyledSubTitle>내용</StyledSubTitle>
