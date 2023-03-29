@@ -9,7 +9,7 @@ const StyledContainer = styled.div`
   background-color: #252423;
   font-size: 20px;
   width: 100%;
-  & * {
+  & *:not(div) {
     cursor: pointer;
   }
 `;
