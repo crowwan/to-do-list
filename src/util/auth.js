@@ -10,4 +10,8 @@ const logout = () => {
   return axios.post(`${BASE_URL}/user/logout`);
 };
 
-export { login, logout };
+const signup = (user) => {
+  return axios.post(`${BASE_URL}/user/signup`, { ...user });
+};
+
+export { login, logout, signup };
