@@ -8,8 +8,7 @@ import { setUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import StyledSubTitle from "../styled/StyledSubTitle";
 import StyledErrorMsg from "../styled/StyledErrorMsg";
-import axios from "axios";
-import { login } from "../util/auth";
+import { login, signup } from "../util/auth";
 const StyledContainer = styled.div`
   background-color: #252423;
   border-radius: 10px;
@@ -67,25 +66,28 @@ function LogInForm() {
     }
     return ret;
   };
-
+  const userAuthAction = (fn) => {
+    const userData = {
+      uid: idRef.current.value,
+      password: pwRef.current.value,
+    };
+    fn(userData)
+      .then((res) => {
+        // 로그인 서버 요청을 하고 성공하면 => 뭘 하겠다.
+        // 서버에서 받아온 데이터를 이용해야 한다. => setData(res);
+        dispatch(setUser(true));
+        navigation("/today");
+      })
+      .catch(() => {
+        setErrMsg((prev) => ({ ...prev, db: "로그인에 실패하였습니다." }));
+      });
+  };
   const onLoginClick = (e) => {
     e.preventDefault();
     if (!loginValidate(idRef.current.value, pwRef.current.value)) return;
     // 생각보다 느림 로딩 페이지 반드시 필요
-    (() => {
-      const userData = {
-        uid: idRef.current.value,
-        password: pwRef.current.value,
-      };
-      login(userData)
-        .then((res) => {
-          dispatch(setUser(true));
-          navigation("/today");
-        })
-        .catch(() => {
-          setErrMsg((prev) => ({ ...prev, db: "로그인에 실패하였습니다." }));
-        });
-    })();
+    if (!isSignup) userAuthAction(login);
+    else userAuthAction(signup);
   };
 
   return (
