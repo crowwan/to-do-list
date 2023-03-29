@@ -13,6 +13,11 @@ const StyledList = styled.li`
   & span:first-child {
     color: #82abf1;
   }
+  &:hover {
+    cursor: pointer;
+    transition: all 0.5s;
+    background-color: #3b3a39;
+  }
 `;
 
 function StyledNavItem({ icon, title, onClick }) {
