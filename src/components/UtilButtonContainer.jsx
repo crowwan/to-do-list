@@ -53,12 +53,13 @@ function UtilButtonContainer({ btns, name }) {
           </StyledTypeBtn>
         ))}
       </StyledTypeBtnContainer>
-      {btns.map((a) => (
+      {btns.map((a, i) => (
         <StyledSubmitBtn
           onClick={() =>
             a.onClickHandler(type.find((a) => a.checked).name.toLowerCase())
           }
           bgc={a.bgColor}
+          key={i}
         >
           {a.text}
         </StyledSubmitBtn>
