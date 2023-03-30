@@ -3,21 +3,20 @@ import styled from "styled-components";
 const StyledNavButton = styled.div`
   cursor: pointer;
   position: relative;
-  width: 25px;
-  height: 3px;
-  background-color: #fff;
-  &::after {
-    content: "";
-    position: absolute;
-    top: -8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  & div:nth-child(1) {
     width: 25px;
     height: 3px;
     background-color: #fff;
   }
-  &::before {
-    content: "";
-    position: absolute;
-    top: 8px;
+  & div:nth-child(2) {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+  }
+  & div:nth-child(3) {
     width: 25px;
     height: 3px;
     background-color: #fff;
@@ -25,5 +24,11 @@ const StyledNavButton = styled.div`
 `;
 
 export default function NavButton({ onNavBtnClick }) {
-  return <StyledNavButton onClick={onNavBtnClick} />;
+  return (
+    <StyledNavButton onClick={onNavBtnClick}>
+      <div></div>
+      <div></div>
+      <div></div>
+    </StyledNavButton>
+  );
 }

@@ -18,7 +18,7 @@ const StyledNavContainer = styled(StyledContainer)`
   width: 80vw;
   position: absolute;
   height: calc(100%);
-  padding-top: 1.5rem;
+  padding-top: 1rem;
   color: #fff;
   animation: ${slideIn} 0.2s ease;
 `;

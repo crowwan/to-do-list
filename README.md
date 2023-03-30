@@ -7,7 +7,16 @@
 
 ![](./demo.png)
 
+## 사용 스택
+
+- react
+- styled components
+- redux
+
 ## 구현 기능
+
+- 유저 로그인 기능 : 서버 / 데이터 베이스 연동 (node.js / supabase)
+- todo CRUD : 데이터 베이스 연동 (supbase)
 
 ## 수정하고 싶은 부분
 
