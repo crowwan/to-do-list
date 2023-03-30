@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import { drop } from "../animations/drop";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { updateData } from "../features/dataSlice";
+import { updateTodo } from "../util/todos";
+import Loading from "../ui/Loading";
 
 const StyledItemContainer = styled.div`
   display: flex;
@@ -48,17 +53,34 @@ const StyledStarContainer = styled.div`
   align-items: center;
 `;
 function ToDoItem({ item, setModalItem }) {
-  // 텍스트 길이를 넘어가면 그냥 없애라
+  const [isLoading, setIsLoading] = useState(false);
 
+  const dispatch = useDispatch();
+  const onItemClick = () => {
+    setModalItem(item);
+  };
+  const onButtonClick = (key) => (e) => {
+    e.stopPropagation();
+    const newItem = { ...item, [key]: !item[key] };
+    setIsLoading(true);
+    updateTodo(item.id, newItem).then((res) => {
+      dispatch(updateData(newItem));
+      setIsLoading(false);
+    });
+  };
   // TODO: click event handler 수정
   return (
     <>
-      <StyledItemContainer onClick={() => setModalItem(item)}>
-        <StyledCheckCircle checked={item.isDone} />
+      {isLoading && <Loading />}
+      <StyledItemContainer onClick={onItemClick}>
+        <StyledCheckCircle
+          checked={item.checked}
+          onClick={onButtonClick("checked")}
+        />
         <StyledTask>
           <span>{item.content}</span>
         </StyledTask>
-        <StyledStarContainer>
+        <StyledStarContainer onClick={onButtonClick("important")}>
           {!item.important ? (
             <AiOutlineStar color="#82abf1" size="18px" />
           ) : (
