@@ -11,6 +11,7 @@ import StyledErrorMsg from "../styled/StyledErrorMsg";
 import { addData } from "../features/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../util/todos";
+import Loading from "../ui/Loading";
 
 const StyledMain = styled.main`
   color: #fff;
@@ -40,6 +41,7 @@ const filterByPath = (a, path) => {
 };
 
 function Main({ title, path }) {
+  const [isLoading, setIsLoading] = useState(false);
   const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
   const [modalItem, setModalItem] = useState(null);
@@ -65,13 +67,14 @@ function Main({ title, path }) {
       important: false,
       checked: false,
     };
-    (() => {
-      addTodo(newData).then((res) => {
-        dispatch(addData(res.data[0]));
-        setErrMsg("");
-        inputRef.current.value = "";
-      });
-    })();
+
+    setIsLoading(true);
+    addTodo(newData).then((res) => {
+      dispatch(addData(res.data[0]));
+      setErrMsg("");
+      inputRef.current.value = "";
+      setIsLoading(false);
+    });
   };
   return (
     <>
@@ -90,11 +93,14 @@ function Main({ title, path }) {
             />
             {errMsg && <StyledErrorMsg>{errMsg}</StyledErrorMsg>}
           </StyledInputContainer>
+          {isLoading && <Loading />}
           <StyledToDoContainer>
-            {data
+            {[...data]
               .filter((a) => filterByPath(a, path))
-              .map((a, i) => (
-                <ToDoItem key={i} item={a} setModalItem={setModalItem} />
+              .sort((a) => (a.checked ? 1 : -1))
+              .sort((a) => (a.important && !a.checked ? -1 : 1))
+              .map((a) => (
+                <ToDoItem key={a.id} item={a} setModalItem={setModalItem} />
               ))}
           </StyledToDoContainer>
         </StyledMain>
