@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyles from "./components/GlobalStyles";
@@ -12,7 +11,7 @@ import { getTodos } from "./util/todos";
 
 function App() {
   // TODO: login slice delete
-  const isLogin = useSelector((s) => s.isLogin);
+
   const currentUser = useSelector((s) => s.user);
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -21,20 +20,19 @@ function App() {
     if (!currentUser) {
       navigation("/");
     } else {
-      (() => {
-        getTodos()
-          .then((res) => {
-            dispatch(setData(res.data));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })();
+      getTodos()
+        .then((res) => {
+          dispatch(setData(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, [currentUser]);
   return (
     <>
       <GlobalStyles />
+
       <Routes>
         <Route path="/" element={!currentUser ? <LogInPage /> : <Template />}>
           {routerData.map((a) => (
