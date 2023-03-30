@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styled from "styled-components";
 import UtilButtonContainer from "../components/UtilButtonContainer";
@@ -12,6 +12,7 @@ import StyledErrorMsg from "../styled/StyledErrorMsg";
 import { removeData, updateData } from "../features/dataSlice";
 import { useDispatch } from "react-redux";
 import { deleteTodo, updateTodo } from "../util/todos";
+import Loading from "./Loading";
 
 const StyledWrapper = styled(StyledContainer)`
   position: fixed;
@@ -27,6 +28,7 @@ const StyledWrapper = styled(StyledContainer)`
 `;
 
 function ToDoItemModal({ item, setModalItem }) {
+  const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
   const containerRef = useRef(null);
   const [errMsg, setErrMsg] = useState("");
@@ -42,53 +44,58 @@ function ToDoItemModal({ item, setModalItem }) {
       return;
     }
     const newItem = { ...item, type, content: inputRef.current.value };
-    (() => {
-      updateTodo(item.id, newItem)
-        .then((res) => {
-          dispatch(updateData(newItem));
-          setModalItem(null);
-        })
-        .catch((err) => console.error(err));
-    })();
+
+    setIsLoading(true);
+    updateTodo(item.id, newItem)
+      .then((res) => {
+        dispatch(updateData(newItem));
+        setModalItem(null);
+        setIsLoading(false);
+      })
+      .catch((err) => console.error(err));
   };
 
   const onDeleteClick = () => {
     console.log(item.id);
-    (() => {
-      deleteTodo(item.id).then((res) => {
-        dispatch(removeData({ id: item.id }));
-        setModalItem(null);
-      });
-    })();
+
+    setIsLoading(true);
+    deleteTodo(item.id).then((res) => {
+      dispatch(removeData({ id: item.id }));
+      setModalItem(null);
+      setIsLoading(false);
+    });
   };
 
   useEffect(() => {
     inputRef.current.value = item.content;
   }, []);
   return (
-    <StyledWrapper onClick={onModalOutsideClick} ref={containerRef}>
-      <StyledInputContainer>
-        <StyledMainTitle>수정하기</StyledMainTitle>
-        <StyledSubTitle>내용</StyledSubTitle>
-        <StyledInput
-          ref={inputRef}
-          placeholder={"오늘 할 일을 여기에 입력해주세요."}
-        />
-        <StyledSubTitle>타입</StyledSubTitle>
-        <UtilButtonContainer
-          btns={[
-            { onClickHandler: onUpdateClick, text: "수정하기" },
-            {
-              onClickHandler: onDeleteClick,
-              text: "삭제하기",
-              bgColor: "#ff6d6d",
-            },
-          ]}
-          name={item.type}
-        />
-        {errMsg && <StyledErrorMsg>{errMsg}</StyledErrorMsg>}
-      </StyledInputContainer>
-    </StyledWrapper>
+    <>
+      {isLoading && <Loading />}
+      <StyledWrapper onClick={onModalOutsideClick} ref={containerRef}>
+        <StyledInputContainer>
+          <StyledMainTitle>수정하기</StyledMainTitle>
+          <StyledSubTitle>내용</StyledSubTitle>
+          <StyledInput
+            ref={inputRef}
+            placeholder={"오늘 할 일을 여기에 입력해주세요."}
+          />
+          <StyledSubTitle>타입</StyledSubTitle>
+          <UtilButtonContainer
+            btns={[
+              { onClickHandler: onUpdateClick, text: "수정하기" },
+              {
+                onClickHandler: onDeleteClick,
+                text: "삭제하기",
+                bgColor: "#ff6d6d",
+              },
+            ]}
+            name={item.type}
+          />
+          {errMsg && <StyledErrorMsg>{errMsg}</StyledErrorMsg>}
+        </StyledInputContainer>
+      </StyledWrapper>
+    </>
   );
 }
 
