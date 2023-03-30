@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import StyledSubTitle from "../styled/StyledSubTitle";
 import StyledErrorMsg from "../styled/StyledErrorMsg";
 import { login, signup } from "../util/auth";
+import Loading from "../ui/Loading";
 const StyledContainer = styled.div`
   background-color: #252423;
   border-radius: 10px;
@@ -35,6 +36,7 @@ const StyledSignupContainer = styled.div`
   }
 `;
 function LogInForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -71,11 +73,13 @@ function LogInForm() {
       uid: idRef.current.value,
       password: pwRef.current.value,
     };
+    setIsLoading(true);
     fn(userData)
       .then((res) => {
         // 로그인 서버 요청을 하고 성공하면 => 뭘 하겠다.
         // 서버에서 받아온 데이터를 이용해야 한다. => setData(res);
         dispatch(setUser(true));
+        setIsLoading(false);
         navigation("/today");
       })
       .catch(() => {
@@ -91,32 +95,35 @@ function LogInForm() {
   };
 
   return (
-    <StyledContainer>
-      <form onSubmit={onLoginClick}>
-        <StyledMainTitle>{isSignup ? "회원가입" : "로그인"}</StyledMainTitle>
-        <StyledSubTitle>아이디</StyledSubTitle>
-        <StyledLogInInput type="text" placeholder={"아이디"} ref={idRef} />
-        {errMsg.id && <StyledErrorMsg>{errMsg.id}</StyledErrorMsg>}
-        <StyledSubTitle>비밀번호</StyledSubTitle>
-        <StyledLogInInput
-          type="password"
-          placeholder={"비밀번호"}
-          ref={pwRef}
-        />
-        {errMsg.pw && <StyledErrorMsg>{errMsg.pw}</StyledErrorMsg>}
-        {!isSignup ? (
-          <>
-            <StyledSubmitBtn>로그인</StyledSubmitBtn>
-            <StyledSignupContainer>
-              <span onClick={onSignupClick}>회원가입</span>
-            </StyledSignupContainer>
-          </>
-        ) : (
-          <StyledSubmitBtn>회원가입</StyledSubmitBtn>
-        )}
-        {errMsg.db && <StyledErrorMsg>{errMsg.db}</StyledErrorMsg>}
-      </form>
-    </StyledContainer>
+    <>
+      {isLoading && <Loading />}
+      <StyledContainer>
+        <form onSubmit={onLoginClick}>
+          <StyledMainTitle>{isSignup ? "회원가입" : "로그인"}</StyledMainTitle>
+          <StyledSubTitle>아이디</StyledSubTitle>
+          <StyledLogInInput type="text" placeholder={"아이디"} ref={idRef} />
+          {errMsg.id && <StyledErrorMsg>{errMsg.id}</StyledErrorMsg>}
+          <StyledSubTitle>비밀번호</StyledSubTitle>
+          <StyledLogInInput
+            type="password"
+            placeholder={"비밀번호"}
+            ref={pwRef}
+          />
+          {errMsg.pw && <StyledErrorMsg>{errMsg.pw}</StyledErrorMsg>}
+          {!isSignup ? (
+            <>
+              <StyledSubmitBtn>로그인</StyledSubmitBtn>
+              <StyledSignupContainer>
+                <span onClick={onSignupClick}>회원가입</span>
+              </StyledSignupContainer>
+            </>
+          ) : (
+            <StyledSubmitBtn>회원가입</StyledSubmitBtn>
+          )}
+          {errMsg.db && <StyledErrorMsg>{errMsg.db}</StyledErrorMsg>}
+        </form>
+      </StyledContainer>
+    </>
   );
 }
 
