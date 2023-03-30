@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import LogInForm from "../components/LogInForm";
 import StyledContainer from "../styled/StyledContainer";

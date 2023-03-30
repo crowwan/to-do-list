@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import StyledSubmitBtn from "../styled/StyledSubmitBtn";
 import StyledTypeBtn from "../styled/StyledTypeBtn";

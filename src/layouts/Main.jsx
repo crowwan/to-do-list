@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import StyledContainer from "../styled/StyledContainer";
 import styled from "styled-components";
 import UtilButtonContainer from "../components/UtilButtonContainer";
