@@ -14,6 +14,7 @@ const StyledContainer = styled.div`
   background-color: #252423;
   border-radius: 10px;
   width: 80vw;
+  max-width: 600px;
   padding: 1rem;
 `;
 
