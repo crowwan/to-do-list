@@ -35,18 +35,21 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      {isLoading && <Loading />}
-      <Routes>
-        <Route path="/" element={!currentUser ? <LogInPage /> : <Template />}>
-          {routerData.map((a) => (
-            <Route
-              key={a.name}
-              path={a.path}
-              element={<Main title={a.name} path={a.path} />}
-            />
-          ))}
-        </Route>
-      </Routes>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Routes>
+          <Route path="/" element={!currentUser ? <LogInPage /> : <Template />}>
+            {routerData.map((a) => (
+              <Route
+                key={a.name}
+                path={a.path}
+                element={<Main title={a.name} path={a.path} />}
+              />
+            ))}
+          </Route>
+        </Routes>
+      )}
     </>
   );
 }
