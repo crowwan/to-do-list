@@ -16,7 +16,8 @@ const StyledWrapper = styled.div`
 
 const StyledNavContainer = styled(StyledContainer)`
   width: 80vw;
-  position: absolute;
+  max-width: 500px;
+  position: fixed;
   height: calc(100%);
   padding-top: 1rem;
   color: #fff;
