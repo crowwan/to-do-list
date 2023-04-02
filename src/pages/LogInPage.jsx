@@ -7,6 +7,7 @@ const StyledPageContainer = styled(StyledContainer)`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 function LogInPage() {
