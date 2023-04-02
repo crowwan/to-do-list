@@ -5,7 +5,7 @@ const StyledList = styled.li`
   gap: 1rem;
   width: 100%;
   margin: 1rem 0;
-  background-color: #252423;
+  background-color: ${(props) => props.theme.inputColor};
   padding: 0.5rem 0.8rem;
   list-style: none;
   font-size: 16px;
@@ -15,7 +15,7 @@ const StyledList = styled.li`
   &:hover {
     cursor: pointer;
     transition: all 0.5s;
-    background-color: #3b3a39;
+    background-color: ${(props) => props.theme.hover};
   }
 `;
 
