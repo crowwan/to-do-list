@@ -17,10 +17,11 @@ const StyledWrapper = styled.div`
 const StyledNavContainer = styled(StyledContainer)`
   width: 80vw;
   max-width: 500px;
+  background-color: ${(props) => props.theme.bgColor};
   position: fixed;
   height: calc(100%);
   padding-top: 1rem;
-  color: #fff;
+  color: ${(props) => props.theme.fontColor};
   animation: ${slideIn} 0.2s ease;
 `;
 
