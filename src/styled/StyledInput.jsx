@@ -4,12 +4,12 @@ const StyledInput = styled.input.attrs((props) => ({
   placeholder: props.placeholder,
   maxLength: 40,
 }))`
-  background-color: #5f5f5f;
+  background-color: ${(props) => props.theme.bgSubColor};
   outline: none;
   border: none;
   padding: 0.8rem 1.5rem;
   font-size: 16px;
-  color: white;
+  color: ${(props) => props.theme.fontColor};
   width: 100%;
   border-radius: 5px;
   margin-bottom: 2rem;
