@@ -4,6 +4,7 @@ import { clearUser } from "../features/userSlice";
 import StyledContainer from "../styled/StyledContainer";
 import NavButton from "../components/NavButton";
 import { logout } from "../util/auth";
+import { BsFillSunFill } from "react-icons/bs";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -15,6 +16,11 @@ const StyledHeader = styled.header`
     flex: 1 0 0;
   }
 `;
+
+const StyledHeaderContainer = styled(StyledContainer)`
+  background-color: ${(props) => props.theme.headerColor};
+`;
+
 // TODO: 햄버거 버튼 after before로 만들면 클릭 이벤트 설정이 전체 div박스를 감싸지 못함
 
 const StyledLogoutBtn = styled.button`
@@ -22,7 +28,7 @@ const StyledLogoutBtn = styled.button`
   color: #fff;
   border: none;
 `;
-function Header({ onNavBtnClick }) {
+function Header({ onNavBtnClick, setTheme }) {
   const dispatch = useDispatch();
   const onLogoutClick = () => {
     (() => {
@@ -31,14 +37,18 @@ function Header({ onNavBtnClick }) {
       });
     })();
   };
+  const onThemeClick = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
   return (
-    <StyledContainer bgColor={"#252423"}>
+    <StyledHeaderContainer>
       <StyledHeader>
         <NavButton onNavBtnClick={onNavBtnClick} />
         <div>To Do</div>
+        <BsFillSunFill onClick={onThemeClick} />
         <StyledLogoutBtn onClick={onLogoutClick}>Log Out</StyledLogoutBtn>
       </StyledHeader>
-    </StyledContainer>
+    </StyledHeaderContainer>
   );
 }
 
