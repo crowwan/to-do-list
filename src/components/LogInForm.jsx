@@ -85,6 +85,7 @@ function LogInForm() {
       })
       .catch(() => {
         setErrMsg((prev) => ({ ...prev, db: "로그인에 실패하였습니다." }));
+        setIsLoading(false);
       });
   };
   const onLoginClick = (e) => {
