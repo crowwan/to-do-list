@@ -6,7 +6,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: #252423;
+  background-color: ${(props) => props.theme.inputColor};
   font-size: 20px;
   width: 100%;
   & *:not(div) {
