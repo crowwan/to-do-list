@@ -23,8 +23,8 @@ const StyledWrapper = styled(StyledContainer)`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #1e1e1e;
-  color: #fff;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.fontColor};
 `;
 
 function ToDoItemModal({ item, setModalItem }) {
