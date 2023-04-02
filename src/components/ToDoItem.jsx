@@ -10,7 +10,7 @@ import Loading from "../ui/Loading";
 const StyledItemContainer = styled.div`
   display: flex;
   width: 100%;
-  background-color: #252423;
+  background-color: ${(props) => props.theme.todoColor};
   gap: 0.7rem;
   border-radius: 5px;
   height: 4rem;
@@ -18,11 +18,11 @@ const StyledItemContainer = styled.div`
   padding: 0.8rem 1.5rem;
   font-size: 16px;
   animation: ${drop} 0.2s ease;
-
+  color: ${(props) => props.theme.fontColor};
   &:hover {
     cursor: pointer;
     transition: all 0.5s;
-    background-color: #3b3a39;
+    background-color: ${(props) => props.theme.hover};
   }
 `;
 const StyledTask = styled.div`
@@ -43,7 +43,7 @@ const StyledCheckCircle = styled.div`
   width: 18px;
   height: 18px;
   outline: 1px solid #82abf1;
-  border: 2px solid #252423;
+  /* border: 2px solid ${(props) => props.theme.todoColor}; */
   padding: 5px;
   border-radius: 50%;
   background-color: ${(props) => (props.checked ? "#82abf1" : "")};
