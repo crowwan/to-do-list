@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledInputContainer = styled.div`
   width: 100%;
-  background-color: #252423;
+  background-color: ${(props) => props.theme.inputColor};
   padding: 1rem;
 `;
 
