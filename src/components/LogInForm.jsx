@@ -11,7 +11,7 @@ import StyledErrorMsg from "../styled/StyledErrorMsg";
 import { login, signup } from "../util/auth";
 import Loading from "../ui/Loading";
 const StyledContainer = styled.div`
-  background-color: #252423;
+  background-color: ${(props) => props.theme.inputColor};
   border-radius: 10px;
   width: 80vw;
   max-width: 600px;
@@ -19,7 +19,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledLogInInput = styled(StyledInput)`
-  background-color: #1e1e1e;
+  background-color: ${(props) => props.theme.bgColor};
   border: none;
   margin-bottom: 1rem;
 `;
@@ -32,7 +32,7 @@ const StyledSignupContainer = styled.div`
   flex-direction: row-reverse;
   margin-top: 1rem;
   & span {
-    color: #82abf1;
+    color: ${(props) => props.theme.mainColor};
     text-decoration: none;
   }
 `;
