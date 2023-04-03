@@ -16,7 +16,7 @@
 ## 구현 기능
 
 - 유저 로그인 기능 : 서버 / 데이터 베이스 연동 (node.js / supabase)
-- todo CRUD : 데이터 베이스 연동 (supbase)
+- todo CRUD : 데이터 베이스 연동 (supabase)
 
 ## 수정하고 싶은 부분
 
