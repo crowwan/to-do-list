@@ -85,7 +85,10 @@ function LogInForm() {
         navigation("/today");
       })
       .catch(() => {
-        setErrMsg((prev) => ({ ...prev, db: "로그인에 실패하였습니다." }));
+        setErrMsg((prev) => ({
+          ...prev,
+          db: `${isSignup ? "회원가입" : "로그인"}에 실패하였습니다.`,
+        }));
         setIsLoading(false);
       });
   };
