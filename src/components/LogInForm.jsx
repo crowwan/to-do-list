@@ -32,6 +32,7 @@ const StyledSignupContainer = styled.div`
   flex-direction: row-reverse;
   margin-top: 1rem;
   & span {
+    cursor: pointer;
     color: ${(props) => props.theme.mainColor};
     text-decoration: none;
   }
@@ -50,7 +51,7 @@ function LogInForm() {
   const pwRef = useRef();
 
   const onSignupClick = () => {
-    setIsSignup(true);
+    setIsSignup((prev) => !prev);
   };
 
   const loginValidate = (id, pw) => {
@@ -120,7 +121,12 @@ function LogInForm() {
               </StyledSignupContainer>
             </>
           ) : (
-            <StyledSubmitBtn>회원가입</StyledSubmitBtn>
+            <>
+              <StyledSubmitBtn>회원가입</StyledSubmitBtn>
+              <StyledSignupContainer>
+                <span onClick={onSignupClick}>로그인</span>
+              </StyledSignupContainer>
+            </>
           )}
           {errMsg.db && <StyledErrorMsg>{errMsg.db}</StyledErrorMsg>}
         </form>
