@@ -12,6 +12,9 @@ const StyledList = styled.li`
   & span:first-child {
     color: #82abf1;
   }
+  & span:nth-child(2) {
+    flex: 1 0 0;
+  }
   &:hover {
     cursor: pointer;
     transition: all 0.5s;
@@ -19,12 +22,13 @@ const StyledList = styled.li`
   }
 `;
 
-function StyledNavItem({ icon, title, onClick }) {
+function StyledNavItem({ icon, title, onClick, numOfData }) {
   return (
     <ul>
       <StyledList onClick={onClick}>
         <span>{icon}</span>
         <span>{title}</span>
+        <span>{numOfData}</span>
       </StyledList>
     </ul>
   );

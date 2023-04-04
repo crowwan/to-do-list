@@ -6,6 +6,7 @@ import StyledContainer from "../styled/StyledContainer";
 import NavItem from "../components/NavItem";
 import { slideIn } from "../animations/slideIn";
 import NavButton from "../components/NavButton";
+import { useSelector } from "react-redux";
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -25,9 +26,17 @@ const StyledNavContainer = styled(StyledContainer)`
   animation: ${slideIn} 0.2s ease;
 `;
 
+const filterByPath = (path) => (target) => {
+  if (path === "important") return target.important;
+  if (path === "today")
+    return target.type === "today" || target.type === "everyday";
+  if (path === "everyday") return target.type === "everyday";
+};
+
 function Nav({ onNavBtnClick }) {
   const navigation = useNavigate();
   const wrapperRef = useRef();
+  const data = useSelector((state) => state.data);
   const onNavClick = (path) => {
     navigation(path);
     onNavBtnClick();
@@ -46,6 +55,7 @@ function Nav({ onNavBtnClick }) {
             icon={a.icon}
             title={a.name}
             onClick={() => onNavClick(a.path)}
+            numOfData={data.filter(filterByPath(a.path)).length}
           />
         ))}
       </StyledNavContainer>
