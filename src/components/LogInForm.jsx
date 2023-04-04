@@ -8,7 +8,7 @@ import { setUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import StyledSubTitle from "../styled/StyledSubTitle";
 import StyledErrorMsg from "../styled/StyledErrorMsg";
-import { login, signup } from "../util/auth";
+import { login, signup } from "../api/auth";
 import Loading from "../ui/Loading";
 const StyledContainer = styled.div`
   background-color: ${(props) => props.theme.inputColor};

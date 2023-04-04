@@ -10,7 +10,7 @@ import StyledInputContainer from "../styled/StyledInputContainer";
 import StyledErrorMsg from "../styled/StyledErrorMsg";
 import { addData } from "../features/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../util/todos";
+import { addTodo } from "../api/todos";
 import Loading from "../ui/Loading";
 
 const StyledMain = styled.main`

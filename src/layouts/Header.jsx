@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { clearUser } from "../features/userSlice";
 import StyledContainer from "../styled/StyledContainer";
 import NavButton from "../components/NavButton";
-import { logout } from "../util/auth";
+import { logout } from "../api/auth";
 import { BsFillSunFill } from "react-icons/bs";
 
 const StyledHeader = styled.header`

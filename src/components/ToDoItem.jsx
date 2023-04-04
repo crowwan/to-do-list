@@ -4,7 +4,7 @@ import { drop } from "../animations/drop";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { updateData } from "../features/dataSlice";
-import { updateTodo } from "../util/todos";
+import { updateTodo } from "../api/todos";
 import Loading from "../ui/Loading";
 
 const StyledItemContainer = styled.div`

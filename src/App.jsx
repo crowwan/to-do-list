@@ -9,7 +9,7 @@ import Main from "./layouts/Main";
 import LogInPage from "./pages/LogInPage";
 import Template from "./pages/Template";
 import Loading from "./ui/Loading";
-import { getTodos } from "./util/todos";
+import { getTodos } from "./api/todos";
 
 const themes = {
   light: {
@@ -37,13 +37,13 @@ const themes = {
 };
 
 function App() {
-  // TODO: login slice delete
+  // TODO: 테마 로컬 스토리지 연동
   const [isLoading, setIsLoading] = useState(false);
   const [theme, setTheme] = useState("dark");
   const currentUser = useSelector((s) => s.user);
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  console.log("render");
+
   useEffect(() => {
     if (!currentUser) {
       navigation("/");

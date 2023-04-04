@@ -11,7 +11,7 @@ import StyledErrorMsg from "../styled/StyledErrorMsg";
 
 import { removeData, updateData } from "../features/dataSlice";
 import { useDispatch } from "react-redux";
-import { deleteTodo, updateTodo } from "../util/todos";
+import { deleteTodo, updateTodo } from "../api/todos";
 import Loading from "./Loading";
 
 const StyledWrapper = styled(StyledContainer)`
