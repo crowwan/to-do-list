@@ -15,15 +15,19 @@ import Loading from "../ui/Loading";
 
 const StyledMain = styled.main`
   color: #fff;
-  min-height: calc(100vh - 3rem);
+  max-height: calc(100vh - 3rem);
   padding: 2rem 0;
+  overflow: hidden;
 `;
 
 const StyledToDoContainer = styled.div`
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  overflow: scroll;
+  padding-bottom: 2rem;
+  height: calc(100vh - 400px);
 `;
 
 const filterByPath = (a, path) => {
