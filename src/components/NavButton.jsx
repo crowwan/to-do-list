@@ -21,6 +21,9 @@ const StyledNavButton = styled.div`
     height: 3px;
     background-color: #fff;
   }
+  @media screen and (min-width: 1280px) {
+    display: none;
+  }
 `;
 
 export default function NavButton({ onNavBtnClick }) {
