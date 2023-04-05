@@ -13,7 +13,7 @@ const StyledItemContainer = styled.div`
   background-color: ${(props) => props.theme.todoColor};
   gap: 0.7rem;
   border-radius: 5px;
-  height: 4rem;
+  min-height: 4rem;
   align-items: center;
   padding: 0.8rem 1.5rem;
   font-size: 16px;
@@ -78,7 +78,11 @@ function ToDoItem({ item, setModalItem }) {
           onClick={onButtonClick("checked")}
         />
         <StyledTask>
-          <span>{item.content}</span>
+          {item.checked ? (
+            <del>{item.content}</del>
+          ) : (
+            <span>{item.content}</span>
+          )}
         </StyledTask>
         <StyledStarContainer onClick={onButtonClick("important")}>
           {!item.important ? (
