@@ -21,9 +21,17 @@ const StyledNavContainer = styled(StyledContainer)`
   background-color: ${(props) => props.theme.bgColor};
   position: fixed;
   height: calc(100%);
-  padding-top: 1rem;
+  /* padding-top: 1rem; */
   color: ${(props) => props.theme.fontColor};
   animation: ${slideIn} 0.2s ease;
+`;
+const NavBtnContainer = styled.div`
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3rem;
+  padding: 1rem;
+  background-color: ${(props) => props.theme.headerColor};
 `;
 
 const filterByPath = (path) => (target) => {
@@ -47,8 +55,10 @@ function Nav({ onNavBtnClick }) {
   return (
     <StyledWrapper onClick={onWrapperClick} ref={wrapperRef}>
       <StyledNavContainer>
-        <NavButton onNavBtnClick={onNavBtnClick} />
-        <div style={{ marginTop: "3rem" }}>To Do</div>
+        <NavBtnContainer>
+          <NavButton onNavBtnClick={onNavBtnClick} />
+        </NavBtnContainer>
+        <div style={{ marginTop: "5rem" }}>To Do</div>
         {routerData.map((a) => (
           <NavItem
             key={a.name}
