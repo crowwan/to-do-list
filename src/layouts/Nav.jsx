@@ -9,10 +9,17 @@ import NavButton from "../components/NavButton";
 import { useSelector } from "react-redux";
 
 const StyledWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100vw;
   height: 100vh;
+  display: ${(props) => (props.open ? "block" : "none")};
+  @media screen and (min-width: 1280px) {
+    position: relative;
+    height: transparent;
+    width: 500px;
+    display: block;
+  }
 `;
 
 const StyledNavContainer = styled(StyledContainer)`
@@ -24,6 +31,11 @@ const StyledNavContainer = styled(StyledContainer)`
   /* padding-top: 1rem; */
   color: ${(props) => props.theme.fontColor};
   animation: ${slideIn} 0.2s ease;
+  @media screen and (min-width: 1280px) {
+    position: relative;
+    width: 500px;
+    height: transparent;
+  }
 `;
 const NavBtnContainer = styled.div`
   position: absolute;
@@ -32,6 +44,17 @@ const NavBtnContainer = styled.div`
   height: 3rem;
   padding: 1rem;
   background-color: ${(props) => props.theme.headerColor};
+  @media screen and (min-width: 1280px) {
+    display: none;
+  }
+`;
+const StyledNavTitle = styled.div`
+  margin-top: 5rem;
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 0;
+    padding-top: 3rem;
+  }
 `;
 
 const filterByPath = (path) => (target) => {
@@ -41,7 +64,7 @@ const filterByPath = (path) => (target) => {
   if (path === "everyday") return target.type === "everyday";
 };
 
-function Nav({ onNavBtnClick }) {
+function Nav({ onNavBtnClick, open }) {
   const navigation = useNavigate();
   const wrapperRef = useRef();
   const data = useSelector((state) => state.data);
@@ -53,12 +76,12 @@ function Nav({ onNavBtnClick }) {
     if (e.target === wrapperRef.current) onNavBtnClick();
   };
   return (
-    <StyledWrapper onClick={onWrapperClick} ref={wrapperRef}>
+    <StyledWrapper onClick={onWrapperClick} ref={wrapperRef} open={open}>
       <StyledNavContainer>
         <NavBtnContainer>
           <NavButton onNavBtnClick={onNavBtnClick} />
         </NavBtnContainer>
-        <div style={{ marginTop: "5rem" }}>To Do</div>
+        <StyledNavTitle>To Do</StyledNavTitle>
         {routerData.map((a) => (
           <NavItem
             key={a.name}
