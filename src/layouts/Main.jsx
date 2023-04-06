@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import StyledContainer from "../styled/StyledContainer";
 import styled from "styled-components";
 import UtilButtonContainer from "../components/UtilButtonContainer";
-import ToDoItem from "../components/ToDoItem";
 import StyledMainTitle from "../styled/StyledMainTitle";
 import StyledInput from "../styled/StyledInput";
 import ToDoItemModal from "../ui/ToDoItemModal";
@@ -12,6 +11,8 @@ import { addData } from "../features/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../api/todos";
 import Loading from "../ui/Loading";
+import ToDoContainer from "../components/ToDoContainer";
+import { filterByPath } from "../util/filterByPath";
 
 const StyledMain = styled.main`
   color: #fff;
@@ -20,29 +21,10 @@ const StyledMain = styled.main`
   overflow: hidden;
 `;
 
-const StyledToDoContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-  flex-direction: column;
+const StyledToDoWrapper = styled.div`
   overflow: scroll;
-  padding-bottom: 2rem;
-  height: calc(100vh - 400px);
+  height: calc(100vh - 360px);
 `;
-
-const filterByPath = (a, path) => {
-  switch (path) {
-    case "important":
-      return a.important;
-    case "today":
-      return a.type === "today" || a.type === "everyday";
-    case "everyday":
-      console.log(a, path);
-      return a.type === "everyday";
-    default:
-      return null;
-  }
-};
 
 function Main({ title, path }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,14 +34,6 @@ function Main({ title, path }) {
   const [errMsg, setErrMsg] = useState("");
   const inputRef = useRef();
 
-  // useEffect(() => {
-  //   // route가 바뀌긴 했는데 Main이 다시 렌더링 되지 않아서 useEffect가 실행되지 않은 것 같음
-  //   // 그래서 의존성 배열에 path를 넣어주었음
-
-  //   setData((prev) => prev.filter((a) => filterByPath(a, path)));
-  // }, [path]);
-
-  // TODO: 에러 메시지 렌더링 시 전체가 렌더링 되는 문제 해결해야 함. 인풋 컨테이너를 컴포넌트로 빼면 될 듯
   const onAddClick = (type) => {
     if (!inputRef.current.value.length) {
       setErrMsg("내용을 입력해주세요.");
@@ -98,17 +72,27 @@ function Main({ title, path }) {
             {errMsg && <StyledErrorMsg>{errMsg}</StyledErrorMsg>}
           </StyledInputContainer>
           {isLoading && <Loading />}
-          <StyledToDoContainer>
-            {[...data]
-              .filter((a) => filterByPath(a, path))
-              .sort((a) => (a.checked ? 1 : -1))
-              .sort((a) => (a.important && !a.checked ? -1 : 1))
-              .map((a) => (
-                <ToDoItem key={a.id} item={a} setModalItem={setModalItem} />
-              ))}
-          </StyledToDoContainer>
+          <StyledToDoWrapper>
+            <ToDoContainer
+              data={[...data]
+                .filter((a) => !a.checked)
+                .filter(filterByPath(path))
+                .sort((a) => (a.important ? -1 : 1))}
+              setModalItem={setModalItem}
+              type={"작업"}
+            />
+            <ToDoContainer
+              data={[...data]
+                .filter((a) => a.checked)
+                .filter(filterByPath(path))
+                .sort((a) => (a.important ? -1 : 1))}
+              setModalItem={setModalItem}
+              type={"완료됨"}
+            />
+          </StyledToDoWrapper>
         </StyledMain>
       </StyledContainer>
+
       {modalItem && (
         <ToDoItemModal item={modalItem} setModalItem={setModalItem} />
       )}
