@@ -30,7 +30,8 @@ const StyledTask = styled.div`
   align-items: center;
   width: 70%;
   flex: 1 0 0;
-  & span {
+  & span,
+  & del {
     display: inline-block;
     width: 100%;
     overflow: hidden;
