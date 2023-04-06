@@ -7,24 +7,26 @@ import NavItem from "../components/NavItem";
 import { slideIn } from "../animations/slideIn";
 import NavButton from "../components/NavButton";
 import { useSelector } from "react-redux";
+import { filterByPath } from "../util/filterByPath";
 
 const StyledWrapper = styled.div`
   position: fixed;
   top: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 3rem);
+  z-index: 10;
   display: ${(props) => (props.open ? "block" : "none")};
   @media screen and (min-width: 1280px) {
     position: relative;
     height: transparent;
-    width: 500px;
+    width: 300px;
     display: block;
   }
 `;
 
 const StyledNavContainer = styled(StyledContainer)`
   width: 80vw;
-  max-width: 500px;
+  max-width: 300px;
   background-color: ${(props) => props.theme.bgColor};
   position: fixed;
   height: calc(100%);
@@ -33,8 +35,9 @@ const StyledNavContainer = styled(StyledContainer)`
   animation: ${slideIn} 0.2s ease;
   @media screen and (min-width: 1280px) {
     position: relative;
-    width: 500px;
+    width: 400px;
     height: transparent;
+    background-color: ${(props) => props.theme.todoColor};
   }
 `;
 const NavBtnContainer = styled.div`
@@ -53,16 +56,9 @@ const StyledNavTitle = styled.div`
 
   @media screen and (min-width: 1280px) {
     margin-top: 0;
-    padding-top: 3rem;
+    display: none;
   }
 `;
-
-const filterByPath = (path) => (target) => {
-  if (path === "important") return target.important;
-  if (path === "today")
-    return target.type === "today" || target.type === "everyday";
-  if (path === "everyday") return target.type === "everyday";
-};
 
 function Nav({ onNavBtnClick, open }) {
   const navigation = useNavigate();
@@ -82,15 +78,17 @@ function Nav({ onNavBtnClick, open }) {
           <NavButton onNavBtnClick={onNavBtnClick} />
         </NavBtnContainer>
         <StyledNavTitle>To Do</StyledNavTitle>
-        {routerData.map((a) => (
-          <NavItem
-            key={a.name}
-            icon={a.icon}
-            title={a.name}
-            onClick={() => onNavClick(a.path)}
-            numOfData={data.filter(filterByPath(a.path)).length}
-          />
-        ))}
+        <ul style={{ overflow: "hidden" }}>
+          {routerData.map((a) => (
+            <NavItem
+              key={a.name}
+              icon={a.icon}
+              title={a.name}
+              onClick={() => onNavClick(a.path)}
+              numOfData={data.filter(filterByPath(a.path)).length}
+            />
+          ))}
+        </ul>
       </StyledNavContainer>
     </StyledWrapper>
   );
