@@ -34,6 +34,7 @@ function App() {
         });
     }
   }, [currentUser]);
+
   return (
     <>
       <ThemeProvider theme={themes[theme]}>
