@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledList = styled.li`
   display: flex;
   gap: 1rem;
+  align-items: center;
   width: 100%;
   margin: 1rem 0;
   background-color: ${(props) => props.theme.inputColor};
@@ -10,6 +11,8 @@ const StyledList = styled.li`
   list-style: none;
   font-size: 16px;
   & span:first-child {
+    display: flex;
+    align-items: center;
     color: #82abf1;
   }
   & span:nth-child(2) {
@@ -24,13 +27,13 @@ const StyledList = styled.li`
 
 function StyledNavItem({ icon, title, onClick, numOfData }) {
   return (
-    <ul>
+    <>
       <StyledList onClick={onClick}>
         <span>{icon}</span>
         <span>{title}</span>
         <span>{numOfData}</span>
       </StyledList>
-    </ul>
+    </>
   );
 }
 
