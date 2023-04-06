@@ -25,6 +25,7 @@ const StyledWrapper = styled(StyledContainer)`
   height: 100vh;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.fontColor};
+  z-index: 15;
 `;
 
 function ToDoItemModal({ item, setModalItem }) {
