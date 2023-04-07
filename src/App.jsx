@@ -31,6 +31,7 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
+          setIsLoading(false);
         });
     }
   }, [currentUser]);
