@@ -1,16 +1,16 @@
 import axios from "axios";
 
-// const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = "https://d3jjxq0lnfykmw.cloudfront.net";
 const getTodos = () => {
-  return axios.get(`/todos`);
+  return axios.get(`${BASE_URL}/todos`);
 };
 
 const addTodo = (data) => {
-  return axios.post(`/todos`, data);
+  return axios.put(`${BASE_URL}/todos`, data);
 };
 
 const updateTodo = (id, data) => {
-  return axios.post(`/todos/${id}`, data);
+  return axios.put(`${BASE_URL}/todos/${id}`, data);
 };
 
 const deleteTodo = (id) => {
