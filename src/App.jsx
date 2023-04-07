@@ -34,7 +34,7 @@ function App() {
           setIsLoading(false);
         });
     }
-  }, [currentUser]);
+  }, [currentUser, dispatch, navigation]);
 
   return (
     <>
