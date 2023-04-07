@@ -69,7 +69,7 @@ function ToDoItemModal({ item, setModalItem }) {
 
   useEffect(() => {
     inputRef.current.value = item.content;
-  }, []);
+  }, [item.content]);
   return (
     <>
       {isLoading && <Loading />}
