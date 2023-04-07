@@ -1,17 +1,18 @@
 import axios from "axios";
 
-// const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = "http://localhost:8000";
+
 axios.defaults.withCredentials = true;
 const login = (user) => {
-  return axios.post(`/user/login`, { ...user });
+  return axios.post(`${BASE_URL}/user/login`, { ...user });
 };
 
 const logout = () => {
-  return axios.post(`/user/logout`);
+  return axios.post(`${BASE_URL}/user/logout`);
 };
 
 const signup = (user) => {
-  return axios.post(`/user/signup`, { ...user });
+  return axios.post(`${BASE_URL}/user/signup`, { ...user });
 };
 
 export { login, logout, signup };
