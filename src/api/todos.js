@@ -16,6 +16,7 @@ const updateTodo = (id, data) => {
 
 const deleteTodo = (id) => {
   return axios.delete(`/todos/${id}`);
+  return axios.delete(`/todos/${id}`);
 };
 
 export { getTodos, addTodo, updateTodo, deleteTodo };
