@@ -11,6 +11,7 @@ import Template from "./pages/Template";
 import Loading from "./ui/Loading";
 import { getTodos } from "./api/todos";
 import { themes } from "./data/themeData";
+
 function App() {
   // TODO: 테마 로컬 스토리지 연동
   const [isLoading, setIsLoading] = useState(false);
@@ -66,3 +67,12 @@ function App() {
 }
 
 export default App;
+
+// 20x 성공
+// 30x 성공
+// 40x 에러
+
+// 404 => 해당 메소드로 요청했는데 서버에서 그걸 처리하는 방법이 없다.
+// 메소드가 맞는지, 주소가 맞는 지 확인
+
+// 405 에러는 => 해당 메소드를 허용하지 않는다.
