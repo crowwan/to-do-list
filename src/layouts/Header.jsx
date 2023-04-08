@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { clearUser } from "../features/userSlice";
 import StyledContainer from "../styled/StyledContainer";
@@ -29,6 +29,7 @@ const StyledLogoutBtn = styled.button`
   border: none;
 `;
 function Header({ onNavBtnClick, setTheme }) {
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const onLogoutClick = () => {
     (() => {
@@ -40,11 +41,13 @@ function Header({ onNavBtnClick, setTheme }) {
   const onThemeClick = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
+  console.log(user);
   return (
     <StyledHeaderContainer>
       <StyledHeader>
         <NavButton onNavBtnClick={onNavBtnClick} />
         <div>To Do</div>
+        <span>{user}님</span>
         <BsFillSunFill onClick={onThemeClick} />
         <StyledLogoutBtn onClick={onLogoutClick}>Log Out</StyledLogoutBtn>
       </StyledHeader>
