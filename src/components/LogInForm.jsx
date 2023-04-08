@@ -80,7 +80,7 @@ function LogInForm() {
       .then((res) => {
         // 로그인 서버 요청을 하고 성공하면 => 뭘 하겠다.
         // 서버에서 받아온 데이터를 이용해야 한다. => setData(res);
-        dispatch(setUser(true));
+        dispatch(setUser(idRef.current.value));
         setIsLoading(false);
         navigation("/today");
       })
