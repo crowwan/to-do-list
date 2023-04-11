@@ -25,7 +25,7 @@ const StyledToDoWrapper = styled.div`
   overflow: scroll;
   height: calc(100vh - 360px);
 `;
-
+// TODO: 윈도우 디스플레이에서 스크롤 바 없애기
 function Main({ title, path }) {
   const [isLoading, setIsLoading] = useState(false);
   const data = useSelector((state) => state.data);
