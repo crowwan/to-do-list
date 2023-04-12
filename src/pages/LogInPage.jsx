@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import LogInForm from "../components/LogInForm";
-import StyledContainer from "../styled/StyledContainer";
+import styled from 'styled-components';
+import LogInForm from '../components/LogInForm';
+import StyledContainer from '../styled/StyledContainer';
 
 const StyledPageContainer = styled(StyledContainer)`
   height: 100vh;
