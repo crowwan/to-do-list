@@ -11,7 +11,7 @@ const SectionContainer = styled.div`
 function Template({ setTheme }) {
   const [open, setOpen] = useState(false);
   const onNavBtnClick = () => {
-    setOpen((prev) => !prev);
+    setOpen(prev => !prev);
   };
 
   return (

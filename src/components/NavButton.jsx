@@ -29,9 +29,9 @@ const StyledNavButton = styled.div`
 export default function NavButton({ onNavBtnClick }) {
   return (
     <StyledNavButton onClick={onNavBtnClick}>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div />
+      <div />
+      <div />
     </StyledNavButton>
   );
 }

@@ -2,11 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import StyledSubmitBtn from "../styled/StyledSubmitBtn";
 import StyledTypeBtn from "../styled/StyledTypeBtn";
+
 const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: ${(props) => props.theme.inputColor};
+  background-color: ${props => props.theme.inputColor};
   font-size: 20px;
   width: 100%;
   & *:not(div) {
@@ -26,38 +27,28 @@ function UtilButtonContainer({ btns, name }) {
   const [type, setType] = useState([
     {
       name: "Today",
-      checked: "today" === name,
+      checked: name === "today",
     },
     {
       name: "Everyday",
-      checked: "everyday" === name,
+      checked: name === "everyday",
     },
   ]);
-  const onTypeBtnClick = (name) => {
-    setType((prev) =>
-      prev.map((a) =>
-        a.name === name ? { ...a, checked: true } : { ...a, checked: false }
-      )
-    );
+  const onTypeBtnClick = names => {
+    setType(prev => prev.map(a => (a.name === names ? { ...a, checked: true } : { ...a, checked: false })));
   };
   return (
     <StyledContainer>
       <StyledTypeBtnContainer>
-        {type.map((a) => (
-          <StyledTypeBtn
-            onClick={() => onTypeBtnClick(a.name)}
-            checked={a.checked}
-            key={a.name}
-          >
+        {type.map(a => (
+          <StyledTypeBtn onClick={() => onTypeBtnClick(a.name)} checked={a.checked} key={a.name}>
             {a.name}
           </StyledTypeBtn>
         ))}
       </StyledTypeBtnContainer>
       {btns.map((a, i) => (
         <StyledSubmitBtn
-          onClick={() =>
-            a.onClickHandler(type.find((a) => a.checked).name.toLowerCase())
-          }
+          onClick={() => a.onClickHandler(type.find(el => el.checked).name.toLowerCase())}
           bgc={a.bgColor}
           key={i}
         >

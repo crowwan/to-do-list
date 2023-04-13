@@ -3,16 +3,10 @@ import axios from "axios";
 // const BASE_URL = "http://localhost:8000";
 
 axios.defaults.withCredentials = true;
-const login = (user) => {
-  return axios.post(`/user/login`, { ...user });
-};
+const login = user => axios.post(`/user/login`, { ...user });
 
-const logout = () => {
-  return axios.post(`/user/logout`);
-};
+const logout = () => axios.post(`/user/logout`);
 
-const signup = (user) => {
-  return axios.post(`/user/signup`, { ...user });
-};
+const signup = user => axios.post(`/user/signup`, { ...user });
 
 export { login, logout, signup };

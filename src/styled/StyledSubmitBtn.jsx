@@ -1,6 +1,7 @@
 import styled from "styled-components";
+
 const StyledSubmitBtn = styled.button`
-  background-color: ${(props) => props.bgc || "#82abf1"};
+  background-color: ${props => props.bgc || "#82abf1"};
   width: 100%;
   color: #fff;
   border: none;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const StyledErrorMsg = styled.div`
   color: #ff6d6d;
   width: 100%;
