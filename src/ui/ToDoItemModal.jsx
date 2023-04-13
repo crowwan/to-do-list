@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import UtilButtonContainer from "../components/UtilButtonContainer";
 import StyledContainer from "../styled/StyledContainer";
 import StyledInput from "../styled/StyledInput";
@@ -10,7 +11,6 @@ import StyledSubTitle from "../styled/StyledSubTitle";
 import StyledErrorMsg from "../styled/StyledErrorMsg";
 
 import { removeData, updateData } from "../features/dataSlice";
-import { useDispatch } from "react-redux";
 import { deleteTodo, updateTodo } from "../api/todos";
 import Loading from "./Loading";
 
@@ -23,8 +23,8 @@ const StyledWrapper = styled(StyledContainer)`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: ${(props) => props.theme.bgColor};
-  color: ${(props) => props.theme.fontColor};
+  background-color: ${props => props.theme.bgColor};
+  color: ${props => props.theme.fontColor};
   z-index: 15;
 `;
 
@@ -35,11 +35,11 @@ function ToDoItemModal({ item, setModalItem }) {
   const [errMsg, setErrMsg] = useState("");
   const dispatch = useDispatch();
 
-  const onModalOutsideClick = (e) => {
+  const onModalOutsideClick = e => {
     if (e.target === containerRef.current) setModalItem(null);
   };
 
-  const onUpdateClick = (type) => {
+  const onUpdateClick = type => {
     if (!inputRef.current.value) {
       setErrMsg("내용을 입력해주세요.");
       return;
@@ -48,17 +48,17 @@ function ToDoItemModal({ item, setModalItem }) {
 
     setIsLoading(true);
     updateTodo(item.id, newItem)
-      .then((res) => {
+      .then(res => {
         dispatch(updateData(newItem));
         setModalItem(null);
         setIsLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch(err => console.error(err));
   };
 
   const onDeleteClick = () => {
     setIsLoading(true);
-    deleteTodo(item.id).then((res) => {
+    deleteTodo(item.id).then(res => {
       dispatch(removeData({ id: item.id }));
       setModalItem(null);
       setIsLoading(false);
@@ -75,10 +75,7 @@ function ToDoItemModal({ item, setModalItem }) {
         <StyledInputContainer>
           <StyledMainTitle>수정하기</StyledMainTitle>
           <StyledSubTitle>내용</StyledSubTitle>
-          <StyledInput
-            ref={inputRef}
-            placeholder={"오늘 할 일을 여기에 입력해주세요."}
-          />
+          <StyledInput ref={inputRef} placeholder="오늘 할 일을 여기에 입력해주세요." />
           <StyledSubTitle>타입</StyledSubTitle>
           <UtilButtonContainer
             btns={[

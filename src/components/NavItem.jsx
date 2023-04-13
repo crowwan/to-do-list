@@ -6,7 +6,7 @@ const StyledList = styled.li`
   align-items: center;
   width: 100%;
   margin: 1rem 0;
-  background-color: ${(props) => props.theme.inputColor};
+  background-color: ${props => props.theme.inputColor};
   padding: 0.5rem 0.8rem;
   list-style: none;
   font-size: 16px;
@@ -21,19 +21,17 @@ const StyledList = styled.li`
   &:hover {
     cursor: pointer;
     transition: all 0.5s;
-    background-color: ${(props) => props.theme.hover};
+    background-color: ${props => props.theme.hover};
   }
 `;
 
 function StyledNavItem({ icon, title, onClick, numOfData }) {
   return (
-    <>
-      <StyledList onClick={onClick}>
-        <span>{icon}</span>
-        <span>{title}</span>
-        <span>{numOfData}</span>
-      </StyledList>
-    </>
+    <StyledList onClick={onClick}>
+      <span>{icon}</span>
+      <span>{title}</span>
+      <span>{numOfData}</span>
+    </StyledList>
   );
 }
 

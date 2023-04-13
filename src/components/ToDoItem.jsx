@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
-import { drop } from "../animations/drop";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { drop } from "../animations/drop";
 import { updateData } from "../features/dataSlice";
 import { updateTodo } from "../api/todos";
 import Loading from "../ui/Loading";
@@ -10,7 +10,7 @@ import Loading from "../ui/Loading";
 const StyledItemContainer = styled.div`
   display: flex;
   width: 100%;
-  background-color: ${(props) => props.theme.todoColor};
+  background-color: ${props => props.theme.todoColor};
   gap: 0.7rem;
   border-radius: 5px;
   min-height: 4rem;
@@ -18,11 +18,11 @@ const StyledItemContainer = styled.div`
   padding: 0.8rem 1.5rem;
   font-size: 16px;
   animation: ${drop} 0.2s ease;
-  color: ${(props) => props.theme.fontColor};
+  color: ${props => props.theme.fontColor};
   &:hover {
     cursor: pointer;
     transition: all 0.5s;
-    background-color: ${(props) => props.theme.hover};
+    background-color: ${props => props.theme.hover};
   }
 `;
 const StyledTask = styled.div`
@@ -44,10 +44,10 @@ const StyledCheckCircle = styled.div`
   width: 18px;
   height: 18px;
   outline: 1px solid #82abf1;
-  /* border: 2px solid ${(props) => props.theme.todoColor}; */
+  /* border: 2px solid ${props => props.theme.todoColor}; */
   padding: 5px;
   border-radius: 50%;
-  background-color: ${(props) => (props.checked ? "#82abf1" : "")};
+  background-color: ${props => (props.checked ? "#82abf1" : "")};
 `;
 const StyledStarContainer = styled.div`
   display: flex;
@@ -60,11 +60,11 @@ function ToDoItem({ item, setModalItem }) {
   const onItemClick = () => {
     setModalItem(item);
   };
-  const onButtonClick = (key) => (e) => {
+  const onButtonClick = key => e => {
     e.stopPropagation();
     const newItem = { ...item, [key]: !item[key] };
     setIsLoading(true);
-    updateTodo(item.id, newItem).then((res) => {
+    updateTodo(item.id, newItem).then(res => {
       dispatch(updateData(newItem));
       setIsLoading(false);
     });
@@ -75,23 +75,10 @@ function ToDoItem({ item, setModalItem }) {
     <>
       {isLoading && <Loading />}
       <StyledItemContainer onClick={onItemClick}>
-        <StyledCheckCircle
-          checked={item.checked}
-          onClick={onButtonClick("checked")}
-        />
-        <StyledTask>
-          {item.checked ? (
-            <del>{item.content}</del>
-          ) : (
-            <span>{item.content}</span>
-          )}
-        </StyledTask>
+        <StyledCheckCircle checked={item.checked} onClick={onButtonClick("checked")} />
+        <StyledTask>{item.checked ? <del>{item.content}</del> : <span>{item.content}</span>}</StyledTask>
         <StyledStarContainer onClick={onButtonClick("important")}>
-          {!item.important ? (
-            <AiOutlineStar color="#82abf1" size="18px" />
-          ) : (
-            <AiFillStar color="#82abf1" />
-          )}
+          {!item.important ? <AiOutlineStar color="#82abf1" size="18px" /> : <AiFillStar color="#82abf1" />}
         </StyledStarContainer>
       </StyledItemContainer>
     </>

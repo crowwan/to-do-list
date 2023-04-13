@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { BsFillSunFill } from "react-icons/bs";
 import { clearUser } from "../features/userSlice";
 import StyledContainer from "../styled/StyledContainer";
 import NavButton from "../components/NavButton";
 import { logout } from "../api/auth";
-import { BsFillSunFill } from "react-icons/bs";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -18,7 +18,7 @@ const StyledHeader = styled.header`
 `;
 
 const StyledHeaderContainer = styled(StyledContainer)`
-  background-color: ${(props) => props.theme.headerColor};
+  background-color: ${props => props.theme.headerColor};
 `;
 
 // TODO: 햄버거 버튼 after before로 만들면 클릭 이벤트 설정이 전체 div박스를 감싸지 못함
@@ -29,17 +29,17 @@ const StyledLogoutBtn = styled.button`
   border: none;
 `;
 function Header({ onNavBtnClick, setTheme }) {
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const onLogoutClick = () => {
     (() => {
-      logout().then((res) => {
+      logout().then(res => {
         dispatch(clearUser(false));
       });
     })();
   };
   const onThemeClick = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setTheme(prev => (prev === "light" ? "dark" : "light"));
   };
   console.log(user);
   return (

@@ -41,10 +41,10 @@ const StyledLoaderContainer = styled.div`
 function Loader() {
   return (
     <StyledLoaderContainer>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div />
+      <div />
+      <div />
+      <div />
     </StyledLoaderContainer>
   );
 }
