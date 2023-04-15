@@ -21,8 +21,6 @@ const StyledHeaderContainer = styled(StyledContainer)`
   background-color: ${props => props.theme.headerColor};
 `;
 
-// TODO: 햄버거 버튼 after before로 만들면 클릭 이벤트 설정이 전체 div박스를 감싸지 못함
-
 const StyledLogoutBtn = styled.button`
   background-color: transparent;
   color: #fff;

@@ -96,7 +96,6 @@ function LogInForm() {
   const onLoginClick = e => {
     e.preventDefault();
     if (!loginValidate(idRef.current.value, pwRef.current.value)) return;
-    // 생각보다 느림 로딩 페이지 반드시 필요
     if (!isSignup) userAuthAction(login);
     else userAuthAction(signup);
   };

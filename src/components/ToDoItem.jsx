@@ -69,7 +69,6 @@ function ToDoItem({ item, setModalItem }) {
       setIsLoading(false);
     });
   };
-  // TODO: click event handler 수정
   // TODO: 아웃라인 모바일에서 보면 네모로 보임. 보더로 바꾸는 게 좋을 듯
   return (
     <>
