@@ -1,4 +1,4 @@
-export const filterByPath = (path) => (a) => {
+export const filterByPath = path => a => {
   switch (path) {
     case "important":
       return a.important;
