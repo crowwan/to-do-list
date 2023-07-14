@@ -42,17 +42,14 @@ function App() {
   return (
     <ThemeProvider theme={themes[theme]}>
       <GlobalStyles />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <Routes>
-          <Route path="/" element={!currentUser ? <LogInPage /> : <Template setTheme={setTheme} />}>
-            {routerData.map(a => (
-              <Route key={a.name} path={a.path} element={<Main title={a.name} path={a.path} />} />
-            ))}
-          </Route>
-        </Routes>
-      )}
+
+      <Routes>
+        <Route path="/" element={!currentUser ? <LogInPage /> : <Template setTheme={setTheme} />}>
+          {routerData.map(a => (
+            <Route key={a.name} path={a.path} element={<Main title={a.name} path={a.path} />} />
+          ))}
+        </Route>
+      </Routes>
     </ThemeProvider>
   );
 }
